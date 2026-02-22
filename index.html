@@ -159,7 +159,7 @@
 </head>
 <body>
   <div class="app-container">
-    <h1>📅 <span id="mm">?</span>월 출결 잔여<br>조회 시스템</h1>
+    <h1>📅 <span id="mm">?</span>월 출결 현황<br>조회 시스템</h1>
     
     <div class="search-box">
       <input type="number" id="sid" placeholder="학번 5자리 입력" inputmode="numeric">
@@ -215,7 +215,7 @@
       }
 
       // 교정된 API 주소 (파라미터 포함 완료)
-      const apiTarget = "https://script.google.com/macros/s/AKfycbzYrQhRPUTXpwRch1ITwaNJ1A5HHt77NdMfxc172vQoR09xARkA_5HaCSeg54fn4Z_E/exec?sid=" + id;
+      const apiTarget = "https://script.google.com/macros/s/AKfycbyaIPbIsCOspyW6cq5yHypf3KN8znt7tMH5KP-q8l7j6WBh_j6sbMbJcDX-ePYbps5y/exec?sid=" + id;
 
       fetch(apiTarget)
         .then(res => res.json())
@@ -231,7 +231,15 @@
           updateRow('v1', 'c1', d.res1);
           updateRow('v2', 'c2', d.res2);
           updateRow('v3', 'c3', d.res3);
-          updateRow('v4', 'c4', d.res4);
+          
+          // 핵심: 성별 판독 및 생리 인정 카드(c4) 노출 제어
+          const card4 = document.getElementById('c4');
+          if (d.gender === '남') {
+            card4.style.display = 'none'; // 남학생은 카드를 완전히 삭제
+          } else {
+            card4.style.display = 'flex'; // 여학생이거나 비어있으면 정상 노출
+            updateRow('v4', 'c4', d.res4);
+          }
           
           document.getElementById('result').style.display = 'block';
         })
@@ -252,5 +260,3 @@
   </script>
 </body>
 </html>
-
-
