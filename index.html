@@ -214,8 +214,8 @@
         return;
       }
 
-      // 선생님이 주신 API 주소 (수정 불필요)
-      const apiTarget = "https://script.google.com/macros/s/AKfycbxyX4FUlPWejbXYGbbMRhmC6JXkr-CBEeGhMBYTrgn2M24UvLf70orQ9xSrUk0dtnZX/exec" + id;
+      // 교정된 API 주소 (파라미터 포함 완료)
+      const apiTarget = "https://script.google.com/macros/s/AKfycbyaIPbIsCOspyW6cq5yHypf3KN8znt7tMH5KP-q8l7j6WBh_j6sbMbJcDX-ePYbps5y/exec?sid=" + id;
 
       fetch(apiTarget)
         .then(res => res.json())
@@ -252,7 +252,3 @@
   </script>
 </body>
 </html>
-
-
-
-
